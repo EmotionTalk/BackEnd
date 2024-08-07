@@ -1,7 +1,10 @@
 package com.tutorial.backend.controller;
 
+import com.tutorial.backend.controller.dto.ResultDto;
 import com.tutorial.backend.entity.File;
 import com.tutorial.backend.service.file.FileService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +29,17 @@ import java.nio.file.Paths;
 public class FileController {
 
     private final FileService fileService;
+
+    @PostMapping("/upload")
+    public ResponseEntity<ResultDto<Long>> uploadFile(@RequestParam("file") MultipartFile file) {
+        try {
+            File uploadedFile = fileService.uploadFile(file);
+            return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "Uploading File success", uploadedFile.getId()));
+        } catch (IOException e) {
+            log.error("Error uploading file", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR,"Something been through Wrong..."));
+        }
+    }
 
     @GetMapping("files/{fileName}")
     public ResponseEntity<?> downloadFile(@PathVariable String fileName) {

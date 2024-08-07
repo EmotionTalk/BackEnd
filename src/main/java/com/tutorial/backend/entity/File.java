@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity @Table(name = "tbl_file")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter @Setter
+@Getter @Setter @ToString
 public class File extends Period {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

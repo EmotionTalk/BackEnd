@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.IdClass;
 import java.io.Serializable;
-
 @Entity
 @Table(name = "tbl_file_message")
 @IdClass(FileMessageId.class)
@@ -24,7 +23,7 @@ public class FileMessage implements Serializable {
     private File file;
 
     @Id
-    private Long messageId;
+    private String messageId; // String으로 변경
 
     // Getters and setters
     public File getFile() {
@@ -35,15 +34,16 @@ public class FileMessage implements Serializable {
         this.file = file;
     }
 
-    public Long getMessageId() {
+    public String getMessageId() { // Long에서 String으로 변경
         return messageId;
     }
 
-    public void setMessageId(Long messageId) {
+    public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
     @Builder
-    public FileMessage(File file, Long messageId) {
+    public FileMessage(File file, String messageId) {
         this.file = file;
         this.messageId = messageId;
     }

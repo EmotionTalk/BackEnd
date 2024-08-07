@@ -2,33 +2,29 @@ package com.tutorial.backend.controller;
 
 import com.tutorial.backend.controller.dto.ChatFileMessageDto;
 import com.tutorial.backend.controller.dto.ChatMessageDto;
-import com.tutorial.backend.converter.ByteArrayMultipartFile;
 import com.tutorial.backend.entity.File;
 import com.tutorial.backend.entity.Message;
 import com.tutorial.backend.entity.type.MessageType;
 import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.service.file.FileService;
-import com.tutorial.backend.service.message.MessageServiceImpl;
+import com.tutorial.backend.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class WebSocketController {
 
-    private final MessageServiceImpl messageServiceImpl;
+    private final MessageService messageService;
     private final FileService fileService;
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -58,47 +54,48 @@ public class WebSocketController {
                 .chatRoomId(messageDto.getChatRoomId())
                 .build();
     }
-
     @MessageMapping("/file-message/{chatRoomId}")
-    public void receiveFileMessage(@DestinationVariable Long chatRoomId, @Payload ChatFileMessageDto fileMessageDto, Authentication authentication, ChatMessageDto messageDto) {
-
+    public void receiveFileMessage(@DestinationVariable Long chatRoomId, @Payload ChatFileMessageDto fileMessageDto, Authentication authentication) {
         log.info("File message received: {}", fileMessageDto);
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
-        messageDto.setSenderId( principal.getId());
 
         try {
-            String fileContent = fileMessageDto.getFileContent();
-            String fileName = fileMessageDto.getFileName();
+            Long fileId = fileMessageDto.getFileId();
+            File file = fileService.getFileById(fileId); // 파일 정보를 조회
 
-            if (fileContent != null && !fileContent.isEmpty()) {
-                byte[] fileBytes = Base64.getDecoder().decode(fileContent);
-
-                ByteArrayMultipartFile multipartFile = new ByteArrayMultipartFile(fileName, fileBytes);
-
-
-                // 파일 업로드
-                File uploadedFile = fileService.uploadFile(multipartFile);
-                log.info("File uploaded: {}", uploadedFile.getFilePath());
-
-                // ChatMessageDto 생성 및 설정
-                ChatMessageDto chatMessageDto = ChatMessageDto.builder()
-                        .message("File uploaded")
-                        .sendTime(LocalDateTime.now())
-                        .messageType(MessageType.FILE) // 메시지 타입을 FILE로 설정
-                        .filePath(uploadedFile.getFilePath()) // 업로드된 파일의 경로 설정
-                        .chatRoomId(chatRoomId)
+            if (file != null) {
+                // 메시지 저장
+                Message message = Message.builder()
+                        .content(fileMessageDto.getMessage()) // 메시지 내용 설정
+                        .sendTime(LocalDateTime.now()) // 현재 시간 설정
+                        .type(MessageType.IMAGE.name()) // 메시지 타입 설정
+                        .memberId(principal.getId()) // 발신자 ID 설정
+                        .chatRoomId(chatRoomId) // 채팅방 ID 설정
                         .build();
 
-                // 메시지 저장 (옵션)
-                messageServiceImpl.saveMessage(convertToEntity(chatMessageDto));
+                // 메시지 저장
+                Message savedMessage = messageService.saveMessage(message);
 
-                // 파일 메시지를 해당 채팅방 구독자들에게 전송
+                // FileMessage 엔티티 생성 및 저장
+                messageService.saveFileMessage(file, savedMessage.getId());
+
+                // 채팅방의 구독자들에게 메시지 전송
+                ChatMessageDto chatMessageDto = ChatMessageDto.builder()
+                        .message(message.getContent()) // 메시지 내용
+                        .sendTime(message.getSendTime()) // 메시지 전송 시간
+                        .messageType(MessageType.IMAGE) // 메시지 타입
+                        .senderId(message.getMemberId()) // 발신자 ID
+                        .filePath(file.getFilePath()) // 파일 경로
+                        .chatRoomId(message.getChatRoomId()) // 채팅방 ID
+                        .build();
+
                 messagingTemplate.convertAndSend("/sub/chatroom/" + chatRoomId, chatMessageDto);
             }
-        } catch (IOException e) {
-            log.error("Error uploading file and sending message", e);
+        } catch (Exception e) {
+            log.error("Error processing file message", e);
         }
     }
+
 
     // 기존 메시지 전송
     @MessageMapping("/message/{chatRoomId}")
@@ -108,7 +105,7 @@ public class WebSocketController {
         messageDto.setSenderId(id);
 
         // 메시지 저장
-        Message chatMessage = messageServiceImpl.saveMessage(convertToEntity(messageDto));
+        Message chatMessage = messageService.saveMessage(convertToEntity(messageDto));
 
         // 메시지를 해당 채팅방 구독자들에게 전송
         messagingTemplate.convertAndSend("/sub/chatroom/" + chatRoomId, messageDto);

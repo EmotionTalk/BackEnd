@@ -1,16 +1,18 @@
 package com.tutorial.backend.entity;
 import java.io.Serializable;
 import java.util.Objects;
+import java.io.Serializable;
+import java.util.Objects;
 
 public class FileMessageId implements Serializable {
     private Long file;
-    private Long messageId;
+    private String messageId; // Long에서 String으로 변경
 
     // Default constructor
     public FileMessageId() {}
 
     // Constructor with parameters
-    public FileMessageId(Long file, Long messageId) {
+    public FileMessageId(Long file, String messageId) {
         this.file = file;
         this.messageId = messageId;
     }
@@ -30,4 +32,3 @@ public class FileMessageId implements Serializable {
         return Objects.hash(file, messageId);
     }
 }
-

@@ -24,7 +24,7 @@ public class QFileMessage extends EntityPathBase<FileMessage> {
 
     public final QFile file;
 
-    public final NumberPath<Long> messageId = createNumber("messageId", Long.class);
+    public final StringPath messageId = createString("messageId");
 
     public QFileMessage(String variable) {
         this(FileMessage.class, forVariable(variable), INITS);
