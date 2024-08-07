@@ -3,7 +3,7 @@ package com.tutorial.backend.controller;
 
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.provider.MemberDetail;
-import com.tutorial.backend.service.AuthService;
+import com.tutorial.backend.service.auth.AuthServiceImpl;
 import com.tutorial.backend.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,22 +13,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth/*")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthServiceImpl authServiceImpl;
     private final MemberService memberService;
 
 
-    @PostMapping("/reissue")
+    @PostMapping("reissue")
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
-        return ResponseEntity.ok(authService.reissue(tokenRequestDto));
+        return ResponseEntity.ok(authServiceImpl.reissue(tokenRequestDto));
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public ResponseEntity<ResultDto<MemberDto>> getUserDetails(Authentication authentication, MemberDto memberDto) {
         // 사용자 정보를 기반으로 회원 정보를 조회하여 반환
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();

@@ -24,7 +24,9 @@ public class QMember extends EntityPathBase<Member> {
 
     public final EnumPath<com.tutorial.backend.entity.type.Authority> authority = createEnum("authority", com.tutorial.backend.entity.type.Authority.class);
 
-    public final ListPath<ChattingHeader, QChattingHeader> chattingHeaders = this.<ChattingHeader, QChattingHeader>createList("chattingHeaders", ChattingHeader.class, QChattingHeader.class, PathInits.DIRECT2);
+    public final ListPath<ChatRoom, QChatRoom> chatRoomsAsParticipant1 = this.<ChatRoom, QChatRoom>createList("chatRoomsAsParticipant1", ChatRoom.class, QChatRoom.class, PathInits.DIRECT2);
+
+    public final ListPath<ChatRoom, QChatRoom> chatRoomsAsParticipant2 = this.<ChatRoom, QChatRoom>createList("chatRoomsAsParticipant2", ChatRoom.class, QChatRoom.class, PathInits.DIRECT2);
 
     public final ListPath<Friend, QFriend> friends = this.<Friend, QFriend>createList("friends", Friend.class, QFriend.class, PathInits.DIRECT2);
 

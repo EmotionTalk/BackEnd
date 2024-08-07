@@ -7,6 +7,6 @@ import com.tutorial.backend.entity.Member;
 import java.util.List;
 
 public interface FriendService {
-    public Friend addNewFriend(String name, Member friend, Member me);
-    public List<FriendDto> getAllFriendsByMemberId(Long memberId);
+    Friend addNewFriend(String name, Member friend, Member me);
+    List<FriendDto> getAllFriendsByMemberId(Long memberId);
 }

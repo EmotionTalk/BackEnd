@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/recomend")
+@RequestMapping("/recomend/*")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class RecommendController {
     private final MemberService memberService;
 

@@ -2,7 +2,7 @@ package com.tutorial.backend.service;
 
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.provider.MemberDetail;
-import com.tutorial.backend.repository.MemberRepository;
+import com.tutorial.backend.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,14 +25,8 @@ public class MemberDetailService implements UserDetailsService {
         }
         log.info(member.getMemberName());
 
-        // 사용자의 권한 정보를 생성
-
         // MemberDetail 객체 생성시 Member와 권한 정보를 함께 전달
         return new MemberDetail(member);
     }
-
-
-
-
 
 }

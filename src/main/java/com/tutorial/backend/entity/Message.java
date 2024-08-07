@@ -1,8 +1,7 @@
 package com.tutorial.backend.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -12,20 +11,38 @@ import java.util.List;
 @Document(collection = "tbl_message")
 @Getter @Setter
 @NoArgsConstructor
+@ToString
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String content;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime sendTime;
+
     private int readCount;
+
     private String emotion;
+
     private String status;
+
     private String type;
 
     private Long memberId;
 
     private Long chatRoomId;
 
+    @Builder
+    public Message(String id, String content, LocalDateTime sendTime, int readCount, String emotion, String status, String type, Long memberId, Long chatRoomId) {
+        this.id = id;
+        this.content = content;
+        this.sendTime = sendTime;
+        this.readCount = readCount;
+        this.emotion = emotion;
+        this.status = status;
+        this.type = type;
+        this.memberId = memberId;
+        this.chatRoomId = chatRoomId;
+    }
 }

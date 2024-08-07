@@ -3,14 +3,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class FileMessageId implements Serializable {
-    private int file;  // `File` 엔티티의 `id` 필드와 타입을 맞춤
+    private Long file;
     private Long messageId;
 
     // Default constructor
     public FileMessageId() {}
 
     // Constructor with parameters
-    public FileMessageId(int file, Long messageId) {
+    public FileMessageId(Long file, Long messageId) {
         this.file = file;
         this.messageId = messageId;
     }

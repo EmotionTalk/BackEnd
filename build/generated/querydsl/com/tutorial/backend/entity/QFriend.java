@@ -24,7 +24,7 @@ public class QFriend extends EntityPathBase<Friend> {
 
     public final QMember friendMember;
 
-    public final NumberPath<Long> friendMemberId = createNumber("friendMemberId", Long.class);
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath isRegistered = createString("isRegistered");
 

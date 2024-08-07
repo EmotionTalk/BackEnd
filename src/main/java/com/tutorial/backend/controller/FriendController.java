@@ -22,7 +22,6 @@ import java.util.Optional;
 @RequestMapping("/friend/*")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class FriendController {
     private final FriendService friendService;
     private final MemberService memberService;
@@ -38,18 +37,15 @@ public class FriendController {
         if (foundMember.isPresent()) {
             Friend friend = friendService.addNewFriend(name, foundMember.get(), me);
             return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공!"));
-        } else if (foundMember.isEmpty()) {
-            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "실패!"));
         } else {
-            return ResponseEntity.internalServerError().body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류!"));
+            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "실패!"));
         }
     }
 
     @GetMapping("getFriends")
     public ResponseEntity<ResultDto<List<FriendDto>>> getMyFriends(Authentication authentication){
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
-        List<FriendDto> myFriends = friendService.getAllFriendsByMemberId(principal.getId());
+        List<FriendDto> myFriends = friendService.getAllFriendsByMemberId(principal.getMember().getId());
         return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED,"친구를 불러왔습니다!",myFriends));
     }
-
 }

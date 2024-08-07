@@ -1,4 +1,8 @@
-com/tutorial/backend/BackendApplicationTests.java
- com.tutorial.backend.BackendApplicationTests
+com/tutorial/backend/queryDSLTest/ChatRoomRepositoryTest.java
+ com.tutorial.backend.queryDSLTest.ChatRoomRepositoryTest
 com/tutorial/backend/queryDSLTest/FriendQueryDSLTest.java
  com.tutorial.backend.queryDSLTest.FriendQueryDSLTest
+com/tutorial/backend/BackendApplicationTests.java
+ com.tutorial.backend.BackendApplicationTests
+com/tutorial/backend/serviceTest/MessageServiceTest.java
+ com.tutorial.backend.serviceTest.MessageServiceTest

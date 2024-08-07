@@ -12,6 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.context.request.RequestContextListener;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 @EnableJpaAuditing
 @SpringBootApplication
 @EnableAspectJAutoProxy
@@ -29,4 +32,12 @@ public class BackendApplication {
 	public RequestContextListener requestContextListener() {
 		return new RequestContextListener();
 	}
+
+	@PostConstruct
+	public void init() {
+		// Set default timezone
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+	}
+
+
 }

@@ -1,6 +1,7 @@
 # server
 server:
   port: 8080
+  timezone: Asia/Seoul # 서버 기본 시간대 설정
 
 # jdbc
 spring:
@@ -19,6 +20,10 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+  jackson:
+    time-zone: Asia/Seoul # Jackson을 사용하는 곳의 시간대 설정
+
   # jpa
   jpa:
     hibernate:

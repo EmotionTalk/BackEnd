@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/member/*")
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000") // 허용할 출처
 public class MemberController {
 
     private final MemberService memberService;

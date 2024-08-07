@@ -1,24 +1,41 @@
 package com.tutorial.backend.config;
 
+import com.tutorial.backend.interceptor.WebSocketInterceptor;
+import com.tutorial.backend.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.messaging.simp.config.ChannelRegistration;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration
-@EnableWebSocket
+@EnableWebSocketMessageBroker
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer {
+@Order(Ordered.HIGHEST_PRECEDENCE + 99)
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    private final WebSocketHandler webSocketHandler;
+    private final TokenProvider tokenProvider;
+
 
     @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // endpoint 설정 : /api/v1/chat/{postId}
-        // 이를 통해서 ws://localhost:9090/ws/chat 으로 요청이 들어오면 websocket 통신을 진행한다.
-        // setAllowedOrigins("*")는 모든 ip에서 접속 가능하도록 해줌
-        registry.addHandler(webSocketHandler, "/ws/chat").setAllowedOrigins("*");
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+//        웹소켓 연결 주소 (ws://localhost:8080/ws)
+        registry.addEndpoint("/ws")
+                .setAllowedOriginPatterns("*");
+    }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/sub");
+        registry.setApplicationDestinationPrefixes("/pub");
+    }
+    // 여기 아래 부분 코드 추가
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new WebSocketInterceptor(tokenProvider));
     }
 }

@@ -2,8 +2,7 @@ package com.tutorial.backend.service.member;
 
 import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.entity.Member;
-import com.tutorial.backend.repository.MemberRepository;
-import com.tutorial.backend.service.member.MemberService;
+import com.tutorial.backend.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
