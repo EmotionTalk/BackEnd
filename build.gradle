@@ -11,7 +11,6 @@ plugins {
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
-
 group = 'com.tutorial'
 version = '1.0'
 sourceCompatibility = '11'
@@ -38,9 +37,13 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.springframework.security:spring-security-web'
 	implementation 'org.springframework.security:spring-security-config'
+
+//	파일 입출력용
 	implementation 'net.coobird:thumbnailator:0.4.14'
 	implementation 'commons-io:commons-io:2.8.0'
 
+//	OpenAI API용
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 //	oauth2.0용
 	implementation ("org.springframework.boot:spring-boot-starter-oauth2-client")
@@ -66,11 +69,15 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-webflux")
 }
 
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.5"
+	}
+}
+
 test {
 	useJUnitPlatform()
 }
-
-
 
 // querydsl에서 사용할 경로 설정
 def querydslDir = "$buildDir/generated/querydsl"

@@ -30,10 +30,9 @@ public class SecurityConfig {
     private static final String MEMBER_PATH = "/member/**";
     private static final String ADMIN_PATH = "/admin/**";
     private static final String WEBSOCKET_PATH = "/ws/**";
-    private static final String WEBSOCKET_PUB_PATH = "/pub/**";
-    private static final String WEBSOCKET_SUB_PATH ="/sub/**";
     private static final String FILE_PATH = "/file/**";
     private static final String FILES_PATH = "/files/**";
+    private static final String OPENAI_PATH = "/OpenAI/**";
 
     private final OAuthService oAuthService;
     private final MemberDetailService memberDetailService;
@@ -75,6 +74,7 @@ public class SecurityConfig {
                 .antMatchers(WEBSOCKET_PATH).permitAll()
                 .antMatchers(FILE_PATH).permitAll()
                 .antMatchers(FILES_PATH).permitAll()
+                .antMatchers(OPENAI_PATH).permitAll()
                 .antMatchers(MEMBER_PATH).hasRole(Authority.USER.name())
                 .antMatchers(ADMIN_PATH).hasRole(Authority.ADMIN.name())
                 .anyRequest().authenticated() // 나머지 API는 인증 필요

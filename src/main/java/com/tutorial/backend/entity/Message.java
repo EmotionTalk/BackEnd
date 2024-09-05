@@ -1,6 +1,7 @@
 package com.tutorial.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tutorial.backend.entity.type.StatusType;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,8 +34,10 @@ public class Message {
 
     private Long chatRoomId;
 
+    private StatusType isDeleted;
+
     @Builder
-    public Message(String id, String content, LocalDateTime sendTime, int readCount, String emotion, String status, String type, Long memberId, Long chatRoomId) {
+     public Message(String id, String content, LocalDateTime sendTime, int readCount, String emotion, String status, String type, Long memberId, Long chatRoomId, StatusType isDeleted) {
         this.id = id;
         this.content = content;
         this.sendTime = sendTime;
@@ -44,5 +47,6 @@ public class Message {
         this.type = type;
         this.memberId = memberId;
         this.chatRoomId = chatRoomId;
+        this.isDeleted = isDeleted;
     }
 }

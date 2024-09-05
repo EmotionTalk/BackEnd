@@ -10,7 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service @Slf4j
+@Service
+@Slf4j
 @RequiredArgsConstructor
 public class MemberDetailService implements UserDetailsService {
 
@@ -19,14 +20,10 @@ public class MemberDetailService implements UserDetailsService {
     @Override
     @Transactional
     public MemberDetail loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByMemberEmail(username).get();
-        if (member == null) {
-            throw new UsernameNotFoundException("User not found with email: " + username);
-        }
-        log.info(member.getMemberName());
+        Member member = memberRepository.findByMemberEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
 
-        // MemberDetail 객체 생성시 Member와 권한 정보를 함께 전달
+        // MemberDetail 객체 생성 시 Member 엔티티를 전달하여 사용자 정보와 권한 정보를 포함
         return new MemberDetail(member);
     }
-
 }

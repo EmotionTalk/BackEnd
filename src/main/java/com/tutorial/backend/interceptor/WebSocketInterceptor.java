@@ -38,7 +38,6 @@ public class WebSocketInterceptor implements ChannelInterceptor {
 
                     // SecurityContextHolder에 Authentication 객체를 설정
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    log.info("User authenticated with token: {}", token);
                 } else {
                     log.error("Invalid JWT token: {}", token);
                     throw new IllegalArgumentException("Invalid JWT token");

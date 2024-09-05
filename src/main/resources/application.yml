@@ -4,23 +4,27 @@ server:
 
 spring:
   datasource:
+#    RDB는 MySQL 사용
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/et
     username: root
     password: 12345678
-
+#   NoSQL은 MongoDB 사용
   mongodb:
     uri: mongodb://localhost:27017/EmotionTalk
 
   main:
     allow-bean-definition-overriding: true
 
+#   파일 입출력 관련 설정들
   mvc:
     hiddenmethod:
       filter:
         enabled: true
     static-path-pattern: /files/**
 
+#   파일 입출력 경로
+# 본인의 프로젝트/files로 경로를 수정해야함
   web:
     resources:
       static-locations: file:/Users/rickyhong/Desktop/Projects/EmotionTalk/files/
@@ -51,10 +55,13 @@ spring:
 
   profiles:
     include: oauth
-
+#    API 키 별도로 분리
+  config:
+    import: application-api.yml
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
 
+# 본인의 프로젝트/files로 경로를 수정해야함
 file:
   upload-dir: /Users/rickyhong/Desktop/Projects/EmotionTalk/files

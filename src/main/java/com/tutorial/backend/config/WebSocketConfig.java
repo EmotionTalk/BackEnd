@@ -20,7 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final TokenProvider tokenProvider;
 
-
+//  웹소켓 연결
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 //        웹소켓 연결 주소 (ws://localhost:8080/ws)
@@ -28,11 +28,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setAllowedOriginPatterns("*");
     }
 
+//  채팅방에서 상대방이 보낸 메시지를 받는 "sub" uri, 상대방에게 메시지를 보내는 "pub" uri
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/sub");
         registry.setApplicationDestinationPrefixes("/pub");
     }
+
     // 여기 아래 부분 코드 추가
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {

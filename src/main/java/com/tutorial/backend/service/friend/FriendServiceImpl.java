@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,11 @@ import java.util.stream.Collectors;
 public class FriendServiceImpl implements FriendService {
 
     private final FriendRepository friendRepository;
+
+    @Override
+    public boolean isMyFriend(Member me, Member friend) {
+        return friendRepository.existsByMemberAndFriendMember(me,friend);
+    }
 
     @Override
     public Friend addNewFriend(String name, Member friend, Member me) {

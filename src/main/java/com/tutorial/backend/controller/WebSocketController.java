@@ -5,6 +5,7 @@ import com.tutorial.backend.controller.dto.ChatMessageDto;
 import com.tutorial.backend.entity.File;
 import com.tutorial.backend.entity.Message;
 import com.tutorial.backend.entity.type.MessageType;
+import com.tutorial.backend.entity.type.StatusType;
 import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.service.file.FileService;
 import com.tutorial.backend.service.message.MessageService;
@@ -71,6 +72,7 @@ public class WebSocketController {
                         .type(MessageType.IMAGE.name()) // 메시지 타입 설정
                         .memberId(principal.getId()) // 발신자 ID 설정
                         .chatRoomId(chatRoomId) // 채팅방 ID 설정
+                        .isDeleted(StatusType.ABLE)
                         .build();
 
                 // 메시지 저장
@@ -85,6 +87,7 @@ public class WebSocketController {
                         .sendTime(message.getSendTime()) // 메시지 전송 시간
                         .messageType(MessageType.IMAGE) // 메시지 타입
                         .senderId(message.getMemberId()) // 발신자 ID
+                        .isDeleted(message.getIsDeleted()) // 삭제 여부
                         .filePath(file.getFilePath()) // 파일 경로
                         .chatRoomId(message.getChatRoomId()) // 채팅방 ID
                         .build();
@@ -96,13 +99,13 @@ public class WebSocketController {
         }
     }
 
-
     // 기존 메시지 전송
     @MessageMapping("/message/{chatRoomId}")
     public void receiveMessage(@DestinationVariable Long chatRoomId, @Payload ChatMessageDto messageDto, Authentication authentication) {
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
         Long id = principal.getId();
         messageDto.setSenderId(id);
+        messageDto.setIsDeleted(StatusType.ABLE);
 
         // 메시지 저장
         Message chatMessage = messageService.saveMessage(convertToEntity(messageDto));

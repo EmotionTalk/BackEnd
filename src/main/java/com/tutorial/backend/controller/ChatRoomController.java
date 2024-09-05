@@ -9,7 +9,6 @@ import com.tutorial.backend.entity.Message;
 import com.tutorial.backend.entity.type.MessageType;
 import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.service.chatroom.ChatRoomService;
-import com.tutorial.backend.service.file.FileService;
 import com.tutorial.backend.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +32,10 @@ public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
     private final MessageService messageService;
-    private final FileService fileService;
+
     @GetMapping("getOrMakeChatRoom")
     public ResponseEntity<ResultDto<ChatRoomWithMessagesDto>> getChatRoom(Authentication authentication, @RequestParam Long friendId) {
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
-        log.info("myId : " + principal.getId() + " friendId : " + friendId);
         Optional<Long> chatRoomId = chatRoomService.getChatRoom(principal.getId(), friendId);
         Long finalChatRoomId;
         if (chatRoomId.isPresent()) {
@@ -63,7 +61,6 @@ public class ChatRoomController {
                 })
                 .collect(Collectors.toList());
 
-        log.info("filePath test"+messageDtos.toString());
         ChatRoomWithMessagesDto responseDto = ChatRoomWithMessagesDto.builder()
                 .chatRoomId(finalChatRoomId)
                 .userId(principal.getId())

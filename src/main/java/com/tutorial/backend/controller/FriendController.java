@@ -35,6 +35,9 @@ public class FriendController {
         String fullPhoneNumber = newFriendRequest.getFullPhoneNumber();
         Optional<Member> foundMember = memberService.getMemberByPhoneNumber(fullPhoneNumber);
         if (foundMember.isPresent()) {
+             if(friendService.isMyFriend(me,foundMember.get())){
+                 return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST,"이미 등록된 친구입니다"));
+             }
             Friend friend = friendService.addNewFriend(name, foundMember.get(), me);
             return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공!"));
         } else {
