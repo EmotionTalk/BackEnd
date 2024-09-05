@@ -12,11 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ChatRoomWithMessagesDto {
     private Long chatRoomId;
+    private Long userId;
     private List<ChatMessageDto> messages;
 
     @Builder
-    public ChatRoomWithMessagesDto(Long chatRoomId, List<ChatMessageDto> messages) {
+    public ChatRoomWithMessagesDto(Long chatRoomId,Long userId ,List<ChatMessageDto> messages) {
         this.chatRoomId = chatRoomId;
+        this.userId = userId;
         this.messages = messages;
     }
 

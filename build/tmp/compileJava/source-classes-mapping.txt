@@ -154,9 +154,8 @@ com/tutorial/backend/repository/file/FileQueryDSL.java
  com.tutorial.backend.repository.file.FileQueryDSL
 com/tutorial/backend/aduit/Period.java
  com.tutorial.backend.aduit.Period
-com/tutorial/backend/controller/dto/ChatRoomWithMessagesDto.java
- com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto
- com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto$ChatRoomWithMessagesDtoBuilder
+com/tutorial/backend/service/file/FileService.java
+ com.tutorial.backend.service.file.FileService
 com/tutorial/backend/service/auth/AuthServiceImpl.java
  com.tutorial.backend.service.auth.AuthServiceImpl
 com/tutorial/backend/repository/friend/FriendQueryDSLImpl.java
@@ -191,7 +190,8 @@ com/tutorial/backend/entity/File.java
  com.tutorial.backend.entity.File$FileBuilder
 com/tutorial/backend/service/message/MessageService.java
  com.tutorial.backend.service.message.MessageService
-com/tutorial/backend/service/file/FileService.java
- com.tutorial.backend.service.file.FileService
 com/tutorial/backend/controller/ChatRoomController.java
  com.tutorial.backend.controller.ChatRoomController
+com/tutorial/backend/controller/dto/ChatRoomWithMessagesDto.java
+ com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto
+ com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto$ChatRoomWithMessagesDtoBuilder
