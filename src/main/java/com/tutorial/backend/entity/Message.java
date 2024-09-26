@@ -3,6 +3,7 @@ package com.tutorial.backend.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tutorial.backend.entity.type.StatusType;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @ToString
 public class Message {
     @Id
+
     private String id;
 
     private String content;
@@ -24,7 +26,7 @@ public class Message {
 
     private int readCount;
 
-    private String emotion;
+    private int emotionNum;
 
     private String status;
 
@@ -36,17 +38,20 @@ public class Message {
 
     private StatusType isDeleted;
 
+    private String aiSuggestion;
+
     @Builder
-     public Message(String id, String content, LocalDateTime sendTime, int readCount, String emotion, String status, String type, Long memberId, Long chatRoomId, StatusType isDeleted) {
+    public Message(String id, String content, LocalDateTime sendTime, int readCount, int emotionNum, String status, String type, Long memberId, Long chatRoomId, StatusType isDeleted, String aiSuggestion) {
         this.id = id;
         this.content = content;
         this.sendTime = sendTime;
         this.readCount = readCount;
-        this.emotion = emotion;
+        this.emotionNum = emotionNum;
         this.status = status;
         this.type = type;
         this.memberId = memberId;
         this.chatRoomId = chatRoomId;
         this.isDeleted = isDeleted;
+        this.aiSuggestion = aiSuggestion;
     }
 }

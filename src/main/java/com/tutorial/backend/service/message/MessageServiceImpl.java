@@ -8,9 +8,11 @@ import com.tutorial.backend.repository.message.MessageRepository;
 import com.tutorial.backend.service.file.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class MessageServiceImpl implements MessageService{
         return messageRepository.save(message);
     }
 
+    @Override
     public void saveFileMessage(File file, String messageId) {
         FileMessage fileMessage = FileMessage.builder()
                 .file(file)
@@ -40,5 +43,16 @@ public class MessageServiceImpl implements MessageService{
 
     public List<FileMessage> getFileMessagesByMessageId(String messageId) {
         return fileMessageRepository.findByMessageId(messageId);
+    }
+
+    @Override
+    public Message getLastMessageByChatRoomId(Long chatRoomId) {
+        return messageRepository.findLastMessageByChatRoomId(chatRoomId);
+
+    }
+
+    @Override
+    public Optional<Message> getMessageById(String id) {
+        return messageRepository.findById(id);
     }
 }

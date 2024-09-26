@@ -37,7 +37,7 @@ public class FileController {
             return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "Uploading File success", uploadedFile.getId()));
         } catch (IOException e) {
             log.error("Error uploading file", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR,"Something been through Wrong..."));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR,"무엇인가 잘못되었어요..."));
         }
     }
 

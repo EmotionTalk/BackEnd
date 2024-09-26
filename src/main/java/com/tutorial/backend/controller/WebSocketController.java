@@ -32,10 +32,11 @@ public class WebSocketController {
     // DTO를 엔티티로 변환하는 메서드
     private Message convertToEntity(ChatMessageDto messageDto) {
         return Message.builder()
+                .id(messageDto.getId())
                 .content(messageDto.getMessage())
                 .sendTime(LocalDateTime.now())
                 .readCount(0)
-                .emotion("")
+                .emotionNum(0)
                 .status("ACTIVE")
                 .type(messageDto.getMessageType().name())
                 .memberId(messageDto.getSenderId())
@@ -45,10 +46,11 @@ public class WebSocketController {
 
     private Message convertToEntity(ChatFileMessageDto messageDto) {
         return Message.builder()
+                .id(messageDto.getId())
                 .content(messageDto.getMessage())
                 .sendTime(LocalDateTime.now())
                 .readCount(0)
-                .emotion("")
+                .emotionNum(0)
                 .status("ACTIVE")
                 .type(messageDto.getMessageType().name())
                 .memberId(messageDto.getSenderId())
@@ -83,6 +85,7 @@ public class WebSocketController {
 
                 // 채팅방의 구독자들에게 메시지 전송
                 ChatMessageDto chatMessageDto = ChatMessageDto.builder()
+                        .id(savedMessage.getId())
                         .message(message.getContent()) // 메시지 내용
                         .sendTime(message.getSendTime()) // 메시지 전송 시간
                         .messageType(MessageType.IMAGE) // 메시지 타입
@@ -110,6 +113,7 @@ public class WebSocketController {
         // 메시지 저장
         Message chatMessage = messageService.saveMessage(convertToEntity(messageDto));
 
+        messageDto.setId(chatMessage.getId());
         // 메시지를 해당 채팅방 구독자들에게 전송
         messagingTemplate.convertAndSend("/sub/chatroom/" + chatRoomId, messageDto);
     }

@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class ChatFileMessageDto {
+    private String id;
     private String message;
     private Long senderId;
     private Long chatRoomId;
@@ -15,7 +16,8 @@ public class ChatFileMessageDto {
     private MessageType messageType;
 
     @Builder
-    public ChatFileMessageDto(String message, Long senderId, Long chatRoomId, Long fileId, MessageType messageType) {
+    public ChatFileMessageDto(String id, String message, Long senderId, Long chatRoomId, Long fileId, MessageType messageType) {
+        this.id = id;
         this.message = message;
         this.senderId = senderId;
         this.chatRoomId = chatRoomId;

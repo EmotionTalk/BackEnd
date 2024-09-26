@@ -23,7 +23,7 @@ public class MessageServiceImplTest {
         message.setChatRoomId(2L);
         message.setMemberId(2L);
         message.setContent("룰루조아");
-        message.setEmotion("기쁨");
+        message.setEmotionNum(0);
         message.setType("Text");
         message.setStatus(StatusType.ABLE.name());
         message.setReadCount(1);

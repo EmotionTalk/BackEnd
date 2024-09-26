@@ -11,7 +11,7 @@ spring:
     password: 12345678
 #   NoSQL은 MongoDB 사용
   mongodb:
-    uri: mongodb://localhost:27017/EmotionTalk
+    uri: mongodb://localhost:27018/EmotionTalk
 
   main:
     allow-bean-definition-overriding: true

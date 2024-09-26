@@ -1,5 +1,6 @@
 package com.tutorial.backend.service.chatroom;
 
+import com.tutorial.backend.controller.dto.ChatRoomAndFriendDto;
 import com.tutorial.backend.entity.ChatRoom;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.repository.chatroom.ChatRoomRepository;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +25,11 @@ public class ChatRoomServiceImpl implements ChatRoomService{
     @Override
     public Optional<Long> getChatRoom(Long id, Long friendId) {
         return chatRoomRepository.findByMyIdAndFriendId(id, friendId);
+    }
+
+    @Override
+    public List<ChatRoomAndFriendDto> getMyChatRoomAndFriend(Long id) {
+        return chatRoomRepository.findByMyId(id);
     }
 
     @Override

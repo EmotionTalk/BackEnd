@@ -4,5 +4,9 @@ com/tutorial/backend/queryDSLTest/FriendQueryDSLTest.java
  com.tutorial.backend.queryDSLTest.FriendQueryDSLTest
 com/tutorial/backend/BackendApplicationTests.java
  com.tutorial.backend.BackendApplicationTests
-com/tutorial/backend/serviceTest/MessageServiceTest.java
- com.tutorial.backend.serviceTest.MessageServiceTest
+com/tutorial/backend/serviceTest/ChatRoomServiceTest.java
+ com.tutorial.backend.serviceTest.ChatRoomServiceTest
+com/tutorial/backend/serviceTest/MessageServiceImplTest.java
+ com.tutorial.backend.serviceTest.MessageServiceImplTest
+com/tutorial/backend/queryDSLTest/MessageServiceTest.java
+ com.tutorial.backend.queryDSLTest.MessageServiceTest

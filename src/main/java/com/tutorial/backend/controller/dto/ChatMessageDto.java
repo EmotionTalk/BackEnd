@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 public class ChatMessageDto {
 
+    private String id;
+
     private MessageType messageType; // 메시지 타입
 
     private Long chatRoomId; // 방 번호
@@ -21,21 +23,28 @@ public class ChatMessageDto {
 
     private String message; // 메시지
 
+    private int emotionNum;
+
     private String filePath;
 
     private StatusType isDeleted;
+
+    private String aiSuggestion;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime sendTime; // 전송한 시간
 
     @Builder
-    public ChatMessageDto(MessageType messageType, Long chatRoomId, Long senderId, String message, String filePath, LocalDateTime sendTime, StatusType isDeleted) {
+    public ChatMessageDto(String id, MessageType messageType, Long chatRoomId, Long senderId, String message, int emotionNum, String filePath, StatusType isDeleted, String aiSuggestion, LocalDateTime sendTime) {
+        this.id = id;
         this.messageType = messageType;
         this.chatRoomId = chatRoomId;
         this.senderId = senderId;
         this.message = message;
+        this.emotionNum = emotionNum;
         this.filePath = filePath;
         this.isDeleted = isDeleted;
+        this.aiSuggestion = aiSuggestion;
         this.sendTime = sendTime;
     }
 }
