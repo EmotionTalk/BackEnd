@@ -77,4 +77,22 @@ public class OpenAiController {
             return ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "알 수 없는 오류가 발생했습니다");
         }
     }
+
+    @PostMapping("askForMe")
+    public ResultDto<String> askOpenAiForMe(@RequestBody Map<String, String> requestBody){
+        String content = requestBody.get("content");
+
+        try{
+            String result = openAiService.getRecommendForMe(content);
+
+            return ResultDto.res(HttpStatus.ACCEPTED,"적절한 답변을 받아왔어요!",result);
+
+        }catch (Exception e){
+            return ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR,"서버 오류가 생겼어요 ㅠㅠ");
+        }
+
+    }
+
+
+
 }

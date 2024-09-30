@@ -74,7 +74,6 @@ public class SecurityConfig {
                 .antMatchers(WEBSOCKET_PATH).permitAll()
                 .antMatchers(FILE_PATH).permitAll()
                 .antMatchers(FILES_PATH).permitAll()
-                .antMatchers(OPENAI_PATH).permitAll()
                 .antMatchers(MEMBER_PATH).hasRole(Authority.USER.name())
                 .antMatchers(ADMIN_PATH).hasRole(Authority.ADMIN.name())
                 .anyRequest().authenticated() // 나머지 API는 인증 필요

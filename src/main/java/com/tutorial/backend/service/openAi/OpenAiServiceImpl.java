@@ -30,7 +30,7 @@ public class OpenAiServiceImpl implements OpenAiService {
 
         // 프롬프트 작성
         String fullPrompt = "다른 사용자가 이렇게 말했어: \"" + prompt + "\".\n" +
-                "이 말을 보고 적절한 답의 말을 제안해줘.";
+                "이 말을 보고 적절한 답의 말을 제안해.";
 
         request.put("messages", List.of(
                 Map.of("role", "user", "content", fullPrompt)
@@ -41,6 +41,38 @@ public class OpenAiServiceImpl implements OpenAiService {
         try {
             // OpenAI API 호출
             String jsonResponse = openAiClient.getCompletion("Bearer " + apiKey, request);
+
+            // JSON 응답을 파싱하여 "content" 필드 추출
+            JsonNode rootNode = objectMapper.readTree(jsonResponse); // JSON을 파싱
+            JsonNode contentNode = rootNode
+                    .path("choices") // "choices" 배열
+                    .get(0) // 첫 번째 choice
+                    .path("message") // "message" 객체
+                    .path("content"); // "content" 필드
+
+            // content 값이 존재하면 반환, 없으면 null 반환
+            return contentNode.asText(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "AI 응답을 처리하는 중 오류가 발생했습니다.";
+        }
+    }
+    public String getRecommendForMe(String prompt){
+        Map<String, Object> req = new HashMap<>();
+        req.put("model","gpt-3.5-turbo");
+        String fullPrompt = "내가 이렇게 말했어 : \"" + prompt + "\".\n" +
+                "이 말이 과연 상대방에게 말했을때 적절한지, 상대방이 기분나빠하진 않을지 알려줘";
+
+
+        req.put("messages", List.of(
+                Map.of("role", "user", "content", fullPrompt)
+        ));
+
+        req.put("max_tokens", 150);
+
+        try {
+            // OpenAI API 호출
+            String jsonResponse = openAiClient.getCompletion("Bearer " + apiKey, req);
 
             // JSON 응답을 파싱하여 "content" 필드 추출
             JsonNode rootNode = objectMapper.readTree(jsonResponse); // JSON을 파싱
