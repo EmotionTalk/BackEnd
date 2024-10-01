@@ -49,8 +49,8 @@ com/tutorial/backend/config/JwtSecurityConfig.java
  com.tutorial.backend.config.JwtSecurityConfig
 com/tutorial/backend/repository/message/MessageQueryDSLImpl.java
  com.tutorial.backend.repository.message.MessageQueryDSLImpl
-com/tutorial/backend/handler/WebSocketChatHandler.java
- com.tutorial.backend.handler.WebSocketChatHandler
+com/tutorial/backend/config/SecurityConfig.java
+ com.tutorial.backend.config.SecurityConfig
 com/tutorial/backend/service/member/MemberServiceImpl.java
  com.tutorial.backend.service.member.MemberServiceImpl
 com/tutorial/backend/BackendApplication.java
@@ -75,8 +75,8 @@ com/tutorial/backend/entity/FileMessageId.java
  com.tutorial.backend.entity.FileMessageId
 com/tutorial/backend/controller/dto/MemberProfile.java
  com.tutorial.backend.controller.dto.MemberProfile
-com/tutorial/backend/controller/WebSocketController.java
- com.tutorial.backend.controller.WebSocketController
+com/tutorial/backend/service/chatroom/ChatRoomServiceImpl.java
+ com.tutorial.backend.service.chatroom.ChatRoomServiceImpl
 com/tutorial/backend/service/member/MemberService.java
  com.tutorial.backend.service.member.MemberService
 com/tutorial/backend/repository/file/FileRepository.java
@@ -102,27 +102,26 @@ com/tutorial/backend/controller/dto/JoinForm.java
  com.tutorial.backend.controller.dto.JoinForm$JoinFormBuilder
 com/tutorial/backend/entity/QMember.java
  com.tutorial.backend.entity.QMember
-com/tutorial/backend/controller/dto/ChatFileMessageDto.java
- com.tutorial.backend.controller.dto.ChatFileMessageDto
- com.tutorial.backend.controller.dto.ChatFileMessageDto$ChatFileMessageDtoBuilder
-com/tutorial/backend/entity/type/MessageType.java
- com.tutorial.backend.entity.type.MessageType
+com/tutorial/backend/service/openAi/OpenAiServiceImpl.java
+ com.tutorial.backend.service.openAi.OpenAiServiceImpl
+com/tutorial/backend/repository/friend/FriendQueryDSLImpl.java
+ com.tutorial.backend.repository.friend.FriendQueryDSLImpl
 com/tutorial/backend/repository/friend/FriendQueryDSL.java
  com.tutorial.backend.repository.friend.FriendQueryDSL
 com/tutorial/backend/service/file/FileServiceImpl.java
  com.tutorial.backend.service.file.FileServiceImpl
 com/tutorial/backend/controller/dto/FriendDto.java
  com.tutorial.backend.controller.dto.FriendDto
-com/tutorial/backend/controller/ChatRoomController.java
- com.tutorial.backend.controller.ChatRoomController
+com/tutorial/backend/repository/chatroom/ChatRoomQueryDSLImpl.java
+ com.tutorial.backend.repository.chatroom.ChatRoomQueryDSLImpl
 com/tutorial/backend/controller/dto/MemberRequestDto.java
  com.tutorial.backend.controller.dto.MemberRequestDto
 com/tutorial/backend/service/chatroom/ChatRoomService.java
  com.tutorial.backend.service.chatroom.ChatRoomService
 com/tutorial/backend/repository/FileMessage/FileMessageQueryDSL.java
  com.tutorial.backend.repository.FileMessage.FileMessageQueryDSL
-com/tutorial/backend/repository/chatroom/ChatRoomQueryDSLImpl.java
- com.tutorial.backend.repository.chatroom.ChatRoomQueryDSLImpl
+com/tutorial/backend/service/openAi/OpenAiService.java
+ com.tutorial.backend.service.openAi.OpenAiService
 com/tutorial/backend/service/auth/AuthService.java
  com.tutorial.backend.service.auth.AuthService
 com/tutorial/backend/repository/friend/FriendRepository.java
@@ -174,9 +173,9 @@ com/tutorial/backend/entity/FileMessage.java
  com.tutorial.backend.entity.FileMessage$FileMessageBuilder
 com/tutorial/backend/config/WebConfig.java
  com.tutorial.backend.config.WebConfig
-com/tutorial/backend/controller/dto/ChatMessageDto.java
- com.tutorial.backend.controller.dto.ChatMessageDto
- com.tutorial.backend.controller.dto.ChatMessageDto$ChatMessageDtoBuilder
+com/tutorial/backend/controller/dto/ChatRoomAndFriendDto.java
+ com.tutorial.backend.controller.dto.ChatRoomAndFriendDto
+ com.tutorial.backend.controller.dto.ChatRoomAndFriendDto$ChatRoomAndFriendDtoBuilder
 com/tutorial/backend/config/WebClientConfig.java
  com.tutorial.backend.config.WebClientConfig
 com/tutorial/backend/controller/MemberController.java
@@ -195,18 +194,19 @@ com/tutorial/backend/controller/dto/ChatRoomWithMessagesDto.java
  com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto$ChatRoomWithMessagesDtoBuilder
 com/tutorial/backend/service/auth/AuthServiceImpl.java
  com.tutorial.backend.service.auth.AuthServiceImpl
-com/tutorial/backend/repository/friend/FriendQueryDSLImpl.java
- com.tutorial.backend.repository.friend.FriendQueryDSLImpl
-com/tutorial/backend/service/chatroom/ChatRoomServiceImpl.java
- com.tutorial.backend.service.chatroom.ChatRoomServiceImpl
-com/tutorial/backend/controller/dto/ChatRoomAndFriendDto.java
- com.tutorial.backend.controller.dto.ChatRoomAndFriendDto
- com.tutorial.backend.controller.dto.ChatRoomAndFriendDto$ChatRoomAndFriendDtoBuilder
-com/tutorial/backend/service/openAi/OpenAiService.java
- com.tutorial.backend.service.openAi.OpenAiService
+com/tutorial/backend/controller/ChatRoomController.java
+ com.tutorial.backend.controller.ChatRoomController
+com/tutorial/backend/handler/WebSocketChatHandler.java
+ com.tutorial.backend.handler.WebSocketChatHandler
+com/tutorial/backend/controller/dto/ChatMessageDto.java
+ com.tutorial.backend.controller.dto.ChatMessageDto
+ com.tutorial.backend.controller.dto.ChatMessageDto$ChatMessageDtoBuilder
+com/tutorial/backend/entity/type/MessageType.java
+ com.tutorial.backend.entity.type.MessageType
+com/tutorial/backend/controller/dto/ChatFileMessageDto.java
+ com.tutorial.backend.controller.dto.ChatFileMessageDto
+ com.tutorial.backend.controller.dto.ChatFileMessageDto$ChatFileMessageDtoBuilder
 com/tutorial/backend/controller/OpenAiController.java
  com.tutorial.backend.controller.OpenAiController
-com/tutorial/backend/service/openAi/OpenAiServiceImpl.java
- com.tutorial.backend.service.openAi.OpenAiServiceImpl
-com/tutorial/backend/config/SecurityConfig.java
- com.tutorial.backend.config.SecurityConfig
+com/tutorial/backend/controller/WebSocketController.java
+ com.tutorial.backend.controller.WebSocketController

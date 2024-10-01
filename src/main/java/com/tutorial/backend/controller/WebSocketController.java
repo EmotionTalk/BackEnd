@@ -65,17 +65,32 @@ public class WebSocketController {
         try {
             Long fileId = fileMessageDto.getFileId();
             File file = fileService.getFileById(fileId); // 파일 정보를 조회
-
+            Message message = null;
+            log.info(fileMessageDto.getMessageType().name());
             if (file != null) {
                 // 메시지 저장
-                Message message = Message.builder()
-                        .content(fileMessageDto.getMessage()) // 메시지 내용 설정
-                        .sendTime(LocalDateTime.now()) // 현재 시간 설정
-                        .type(MessageType.IMAGE.name()) // 메시지 타입 설정
-                        .memberId(principal.getId()) // 발신자 ID 설정
-                        .chatRoomId(chatRoomId) // 채팅방 ID 설정
-                        .isDeleted(StatusType.ABLE)
-                        .build();
+                if(fileMessageDto.getMessageType().equals(MessageType.IMAGE)){
+                     message = Message.builder()
+                            .content(fileMessageDto.getMessage()) // 메시지 내용 설정
+                            .sendTime(LocalDateTime.now()) // 현재 시간 설정
+                            .type(MessageType.IMAGE.name()) // 메시지 타입 설정
+                            .memberId(principal.getId()) // 발신자 ID 설정
+                            .chatRoomId(chatRoomId) // 채팅방 ID 설정
+                            .isDeleted(StatusType.ABLE)
+                            .build();
+                } else if (fileMessageDto.getMessageType().equals(MessageType.VOICE)){
+                    message = Message.builder()
+                            .content(fileMessageDto.getMessage()) // 메시지 내용 설정
+                            .sendTime(LocalDateTime.now()) // 현재 시간 설정
+                            .type(MessageType.VOICE.name()) // 메시지 타입 설정
+                            .memberId(principal.getId()) // 발신자 ID 설정
+                            .chatRoomId(chatRoomId) // 채팅방 ID 설정
+                            .isDeleted(StatusType.ABLE)
+                            .build();
+                }else{
+                 log.error("이상한 파일이 왔어요");
+                 return;
+                }
 
                 // 메시지 저장
                 Message savedMessage = messageService.saveMessage(message);
@@ -88,7 +103,7 @@ public class WebSocketController {
                         .id(savedMessage.getId())
                         .message(message.getContent()) // 메시지 내용
                         .sendTime(message.getSendTime()) // 메시지 전송 시간
-                        .messageType(MessageType.IMAGE) // 메시지 타입
+                        .messageType(MessageType.valueOf(message.getType())) // 메시지 타입
                         .senderId(message.getMemberId()) // 발신자 ID
                         .isDeleted(message.getIsDeleted()) // 삭제 여부
                         .filePath(file.getFilePath()) // 파일 경로

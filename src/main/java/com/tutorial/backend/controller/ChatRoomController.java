@@ -39,12 +39,7 @@ public class ChatRoomController {
     public ResponseEntity<ResultDto<ChatRoomWithMessagesDto>> getOrMakeChatRoom(Authentication authentication, @RequestParam Long friendId) {
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
         Optional<Long> chatRoomId = chatRoomService.getChatRoom(principal.getId(), friendId);
-        Long finalChatRoomId;
-        if (chatRoomId.isPresent()) {
-            finalChatRoomId = chatRoomId.get();
-        } else {
-            finalChatRoomId = chatRoomService.newRoom(principal.getMember(), friendId);
-        }
+        Long finalChatRoomId = chatRoomId.orElseGet(() -> chatRoomService.newRoom(principal.getMember(), friendId));
 
         List<Message> messages = messageService.getMessagesByChatRoomId(finalChatRoomId);
         log.info(messages.toString());
@@ -52,7 +47,7 @@ public class ChatRoomController {
                 .map(message -> {
                     ChatMessageDto dto = toDto(message);
                     if (message.getType().equals(MessageType.IMAGE.name())) {
-                        List<FileMessage> fileMessages = messageService.getFileMessagesByMessageId(message.getId().toString());
+                        List<FileMessage> fileMessages = messageService.getFileMessagesByMessageId(message.getId());
                         if (!fileMessages.isEmpty()) {
                             File file = fileMessages.get(0).getFile();
                             log.info(file.toString());

@@ -52,7 +52,7 @@ public class OpenAiController {
                             .id(message.getId()) // 기존 메시지 ID 유지
                             .message(message.getContent())  // 메시지 내용
                             .aiSuggestion(result)           // AI 응답 추가된 필드
-                            .messageType(MessageType.TEXT)  // 메시지 타입
+                            .messageType(MessageType.valueOf(message.getType()))  // 메시지 타입
                             .senderId(message.getMemberId()) // 발신자
                             .emotionNum(message.getEmotionNum())
                             .isDeleted(message.getIsDeleted())

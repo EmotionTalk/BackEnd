@@ -12,14 +12,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatRoomAndFriendDto {
     Long chatRoomId;
+    Long friendId;
     String nickName;
     LocalDateTime sendTime;
     String lastChat;
     String friendProfileUrl;
 
     @Builder
-    public ChatRoomAndFriendDto(Long chatRoomId, String nickName, LocalDateTime sendTime, String lastChat, String friendProfileUrl) {
+    public ChatRoomAndFriendDto(Long chatRoomId, Long friendId, String nickName, LocalDateTime sendTime, String lastChat, String friendProfileUrl) {
         this.chatRoomId = chatRoomId;
+        this.friendId = friendId;
         this.nickName = nickName;
         this.sendTime = sendTime;
         this.lastChat = lastChat;

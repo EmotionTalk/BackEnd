@@ -43,31 +43,32 @@ public class ChatRoomQueryDSLImpl implements ChatRoomQueryDSL{
 
         return query
                 .select(Projections.constructor(
-                        ChatRoomAndFriendDto.class, // DTO 생성자 사용
-                        chatRoom.id, // 채팅방 ID
-                        // CASE 문을 사용하여 조건에 맞는 친구 이름 선택
-                        Expressions.stringTemplate("case when {0} then {1} else {2} end",
-                                chatRoom.participant1.id.eq(userId),
-                                participant2.memberName, // 현재 사용자가 participant1인 경우 participant2 이름
-                                participant1.memberName // 현재 사용자가 participant2인 경우 participant1 이름
-                        ),
-                        chatRoom.lastChatTime, // 마지막 채팅 시간
-                        chatRoom.lastChat, // 마지막 채팅 내용
-                        // CASE 문을 사용하여 조건에 맞는 프로필 이미지 URL 선택
-                        Expressions.stringTemplate("case when {0} then {1} else {2} end",
-                                chatRoom.participant1.id.eq(userId),
-                                participant2.profileImageUrl, // 현재 사용자가 participant1인 경우 participant2 프로필 URL
-                                participant1.profileImageUrl // 현재 사용자가 participant2인 경우 participant1 프로필 URL
-                        )
+                        ChatRoomAndFriendDto.class,
+                        chatRoom.id, // Long chatRoomId
+                        // CASE 문을 사용하여 조건에 맞는 친구 ID 선택 (Long 타입 반환)
+                        Expressions.cases()
+                                .when(chatRoom.participant1.id.eq(userId)).then(participant2.id)
+                                .otherwise(participant1.id), // Long friendId
+                        // CASE 문을 사용하여 조건에 맞는 친구 이름 선택 (String 타입 반환)
+                        Expressions.cases()
+                                .when(chatRoom.participant1.id.eq(userId)).then(participant2.memberName)
+                                .otherwise(participant1.memberName), // String nickName
+                        chatRoom.lastChatTime, // LocalDateTime sendTime
+                        chatRoom.lastChat, // String lastChat
+                        // CASE 문을 사용하여 조건에 맞는 프로필 이미지 URL 선택 (String 타입 반환)
+                        Expressions.cases()
+                                .when(chatRoom.participant1.id.eq(userId)).then(participant2.profileImageUrl)
+                                .otherwise(participant1.profileImageUrl) // String friendProfileUrl
                 ))
                 .from(chatRoom)
                 .join(chatRoom.participant1, participant1)
                 .join(chatRoom.participant2, participant2)
                 .where(
                         chatRoom.participant1.id.eq(userId)
-                                .or(chatRoom.participant2.id.eq(userId)) // or 조건: participant1 또는 participant2가 userId인 경우
+                                .or(chatRoom.participant2.id.eq(userId))
                 )
-                .orderBy(chatRoom.lastChatTime.desc()) // 마지막 채팅 시간 기준 내림차순 정렬
+                .orderBy(chatRoom.lastChatTime.desc())
                 .fetch();
     }
+
 }
