@@ -194,8 +194,8 @@ com/tutorial/backend/controller/dto/ChatRoomWithMessagesDto.java
  com.tutorial.backend.controller.dto.ChatRoomWithMessagesDto$ChatRoomWithMessagesDtoBuilder
 com/tutorial/backend/service/auth/AuthServiceImpl.java
  com.tutorial.backend.service.auth.AuthServiceImpl
-com/tutorial/backend/controller/ChatRoomController.java
- com.tutorial.backend.controller.ChatRoomController
+com/tutorial/backend/controller/WebSocketController.java
+ com.tutorial.backend.controller.WebSocketController
 com/tutorial/backend/handler/WebSocketChatHandler.java
  com.tutorial.backend.handler.WebSocketChatHandler
 com/tutorial/backend/controller/dto/ChatMessageDto.java
@@ -208,5 +208,5 @@ com/tutorial/backend/controller/dto/ChatFileMessageDto.java
  com.tutorial.backend.controller.dto.ChatFileMessageDto$ChatFileMessageDtoBuilder
 com/tutorial/backend/controller/OpenAiController.java
  com.tutorial.backend.controller.OpenAiController
-com/tutorial/backend/controller/WebSocketController.java
- com.tutorial.backend.controller.WebSocketController
+com/tutorial/backend/controller/ChatRoomController.java
+ com.tutorial.backend.controller.ChatRoomController

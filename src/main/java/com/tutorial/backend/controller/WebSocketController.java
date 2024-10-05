@@ -109,7 +109,7 @@ public class WebSocketController {
                         .filePath(file.getFilePath()) // 파일 경로
                         .chatRoomId(message.getChatRoomId()) // 채팅방 ID
                         .build();
-
+                log.info(chatMessageDto.toString());
                 messagingTemplate.convertAndSend("/sub/chatroom/" + chatRoomId, chatMessageDto);
             }
         } catch (Exception e) {

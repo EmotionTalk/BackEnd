@@ -46,7 +46,7 @@ public class ChatRoomController {
         List<ChatMessageDto> messageDtos = messages.stream()
                 .map(message -> {
                     ChatMessageDto dto = toDto(message);
-                    if (message.getType().equals(MessageType.IMAGE.name())) {
+                    if (!message.getType().equals(MessageType.TEXT.name())) {
                         List<FileMessage> fileMessages = messageService.getFileMessagesByMessageId(message.getId());
                         if (!fileMessages.isEmpty()) {
                             File file = fileMessages.get(0).getFile();

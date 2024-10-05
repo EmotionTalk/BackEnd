@@ -3,7 +3,6 @@ spring:
     oauth2:
       client:
         registration:
-
           kakao:
             client-name: kakao
             client-id: b060d6f347ce7b37c391f58650dc36eb
@@ -14,7 +13,6 @@ spring:
             scope: account_email,profile_nickname, profile_image, phone_number
 
         provider:
-
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
