@@ -45,6 +45,7 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 #      location: /Users/rickyhong/Desktop/Projects/EmotionTalk/files
+
       location: /home/ubuntu/files
 
   jackson:

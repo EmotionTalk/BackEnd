@@ -3,20 +3,20 @@ server:
   timezone: Asia/Seoul # 서버 기본 시간대 설정
 
 # 로컬용
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/et
-    username: root
-    password: 12345678
-
-# 배포용
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://emotiontalk.cb4pkxlnks4i.ap-northeast-2.rds.amazonaws.com:3306/emotiontalk?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useTimezone=true&useUnicode=true&characterEncoding=UTF-8
-#    username: admin
-#    password: yunki123!
+#    url: jdbc:mysql://localhost:3306/et
+#    username: root
+#    password: 12345678
+
+# 배포용
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://emotiontalk.cb4pkxlnks4i.ap-northeast-2.rds.amazonaws.com:3306/emotiontalk?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useTimezone=true&useUnicode=true&characterEncoding=UTF-8
+    username: admin
+    password: yunki123!
 
   main:
     allow-bean-definition-overriding: true
