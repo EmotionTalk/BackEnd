@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class OAuthController {
 
+
     private final AuthServiceImpl authServiceImpl;
 
     private static final String REDIRECT_URI = "http://localhost:3000/oauth";

@@ -8,6 +8,7 @@ spring:
             client-id: b060d6f347ce7b37c391f58650dc36eb
             client-secret: dK2Rnv9s7Lyp4zp7TXIfSCCTVSzi32QB
             redirect-uri: http://3.36.177.64:8080/login/oauth2/code/kakao
+#            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: account_email,profile_nickname, profile_image, phone_number
