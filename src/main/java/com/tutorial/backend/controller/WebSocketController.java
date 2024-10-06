@@ -69,28 +69,14 @@ public class WebSocketController {
             log.info(fileMessageDto.getMessageType().name());
             if (file != null) {
                 // 메시지 저장
-                if(fileMessageDto.getMessageType().equals(MessageType.IMAGE)){
-                     message = Message.builder()
-                            .content(fileMessageDto.getMessage()) // 메시지 내용 설정
-                            .sendTime(LocalDateTime.now()) // 현재 시간 설정
-                            .type(MessageType.IMAGE.name()) // 메시지 타입 설정
-                            .memberId(principal.getId()) // 발신자 ID 설정
-                            .chatRoomId(chatRoomId) // 채팅방 ID 설정
-                            .isDeleted(StatusType.ABLE)
-                            .build();
-                } else if (fileMessageDto.getMessageType().equals(MessageType.VOICE)){
                     message = Message.builder()
                             .content(fileMessageDto.getMessage()) // 메시지 내용 설정
                             .sendTime(LocalDateTime.now()) // 현재 시간 설정
-                            .type(MessageType.VOICE.name()) // 메시지 타입 설정
+                            .type(fileMessageDto.getMessageType().name()) // 메시지 타입 설정
                             .memberId(principal.getId()) // 발신자 ID 설정
                             .chatRoomId(chatRoomId) // 채팅방 ID 설정
                             .isDeleted(StatusType.ABLE)
                             .build();
-                }else{
-                 log.error("이상한 파일이 왔어요");
-                 return;
-                }
 
                 // 메시지 저장
                 Message savedMessage = messageService.saveMessage(message);
