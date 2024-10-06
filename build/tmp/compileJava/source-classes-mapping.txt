@@ -65,8 +65,8 @@ com/tutorial/backend/jwt/JwtAccessDeniedHandler.java
  com.tutorial.backend.jwt.JwtAccessDeniedHandler
 com/tutorial/backend/service/oauth/OAuthService.java
  com.tutorial.backend.service.oauth.OAuthService
-com/tutorial/backend/controller/OAuthController.java
- com.tutorial.backend.controller.OAuthController
+com/tutorial/backend/controller/WebSocketController.java
+ com.tutorial.backend.controller.WebSocketController
 com/tutorial/backend/jwt/JwtAuthenticationEntryPoint.java
  com.tutorial.backend.jwt.JwtAuthenticationEntryPoint
 com/tutorial/backend/entity/QChatRoom.java
@@ -208,5 +208,5 @@ com/tutorial/backend/controller/dto/ChatFileMessageDto.java
  com.tutorial.backend.controller.dto.ChatFileMessageDto$ChatFileMessageDtoBuilder
 com/tutorial/backend/controller/OpenAiController.java
  com.tutorial.backend.controller.OpenAiController
-com/tutorial/backend/controller/WebSocketController.java
- com.tutorial.backend.controller.WebSocketController
+com/tutorial/backend/controller/OAuthController.java
+ com.tutorial.backend.controller.OAuthController
