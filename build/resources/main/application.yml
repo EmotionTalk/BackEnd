@@ -2,21 +2,12 @@ server:
   port: 8080
   timezone: Asia/Seoul # 서버 기본 시간대 설정
 
-# 로컬용
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/et
     username: root
     password: 12345678
-
-# 배포용
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://emotiontalk.cb4pkxlnks4i.ap-northeast-2.rds.amazonaws.com:3306/emotiontalk?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useTimezone=true&useUnicode=true&characterEncoding=UTF-8
-#    username: admin
-#    password: yunki123!
 
   main:
     allow-bean-definition-overriding: true
@@ -34,11 +25,6 @@ spring:
   web:
     resources:
       static-locations: file:/Users/rickyhong/Desktop/Projects/EmotionTalk/files/
-
-# 배포용
-#  web:
-#    resources:
-#      static-locations: /home/ubuntu/files
 
   servlet:
     multipart:
@@ -78,7 +64,3 @@ jwt:
 # 본인의 프로젝트/files로 경로를 수정해야함
 file:
   upload-dir: /Users/rickyhong/Desktop/Projects/EmotionTalk/files
-
-# 배포용
-#file:
-#  upload-dir: /home/ubuntu/files

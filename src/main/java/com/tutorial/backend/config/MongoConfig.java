@@ -19,7 +19,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Bean
     @Override
     public MongoClient mongoClient() {
-        return MongoClients.create("mongodb+srv://rickyhong0130:NDhlCvIVtJW9zI49@emotiontalk.ux9e1.mongodb.net/?retryWrites=true&w=majority&appName=EmotionTalk");
+        return MongoClients.create("mongodb://localhost:27017");
     }
 
     @Override

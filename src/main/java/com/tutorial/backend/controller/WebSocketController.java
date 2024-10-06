@@ -36,7 +36,7 @@ public class WebSocketController {
                 .content(messageDto.getMessage())
                 .sendTime(LocalDateTime.now())
                 .readCount(0)
-                .emotionNum(0)
+                .emotionNum(messageDto.getEmotionNum())
                 .status("ACTIVE")
                 .type(messageDto.getMessageType().name())
                 .memberId(messageDto.getSenderId())
@@ -50,7 +50,7 @@ public class WebSocketController {
                 .content(messageDto.getMessage())
                 .sendTime(LocalDateTime.now())
                 .readCount(0)
-                .emotionNum(0)
+                .emotionNum(messageDto.getEmotionNum())
                 .status("ACTIVE")
                 .type(messageDto.getMessageType().name())
                 .memberId(messageDto.getSenderId())
@@ -65,14 +65,14 @@ public class WebSocketController {
         try {
             Long fileId = fileMessageDto.getFileId();
             File file = fileService.getFileById(fileId); // 파일 정보를 조회
-            Message message = null;
             log.info(fileMessageDto.getMessageType().name());
             if (file != null) {
                 // 메시지 저장
-                    message = Message.builder()
+                Message message = Message.builder()
                             .content(fileMessageDto.getMessage()) // 메시지 내용 설정
                             .sendTime(LocalDateTime.now()) // 현재 시간 설정
                             .type(fileMessageDto.getMessageType().name()) // 메시지 타입 설정
+                            .emotionNum(fileMessageDto.getEmotionNum())
                             .memberId(principal.getId()) // 발신자 ID 설정
                             .chatRoomId(chatRoomId) // 채팅방 ID 설정
                             .isDeleted(StatusType.ABLE)
@@ -90,6 +90,7 @@ public class WebSocketController {
                         .message(message.getContent()) // 메시지 내용
                         .sendTime(message.getSendTime()) // 메시지 전송 시간
                         .messageType(MessageType.valueOf(message.getType())) // 메시지 타입
+                        .emotionNum(message.getEmotionNum())
                         .senderId(message.getMemberId()) // 발신자 ID
                         .isDeleted(message.getIsDeleted()) // 삭제 여부
                         .filePath(file.getFilePath()) // 파일 경로

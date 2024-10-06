@@ -21,8 +21,8 @@ com/tutorial/backend/controller/FileController.java
  com.tutorial.backend.controller.FileController
 com/tutorial/backend/repository/message/MessageRepository.java
  com.tutorial.backend.repository.message.MessageRepository
-com/tutorial/backend/config/MongoConfig.java
- com.tutorial.backend.config.MongoConfig
+com/tutorial/backend/controller/WebSocketController.java
+ com.tutorial.backend.controller.WebSocketController
 com/tutorial/backend/jwt/JwtFilter.java
  com.tutorial.backend.jwt.JwtFilter
 com/tutorial/backend/handler/CustomHandshakeHandler.java
@@ -65,8 +65,8 @@ com/tutorial/backend/jwt/JwtAccessDeniedHandler.java
  com.tutorial.backend.jwt.JwtAccessDeniedHandler
 com/tutorial/backend/service/oauth/OAuthService.java
  com.tutorial.backend.service.oauth.OAuthService
-com/tutorial/backend/controller/WebSocketController.java
- com.tutorial.backend.controller.WebSocketController
+com/tutorial/backend/controller/OAuthController.java
+ com.tutorial.backend.controller.OAuthController
 com/tutorial/backend/jwt/JwtAuthenticationEntryPoint.java
  com.tutorial.backend.jwt.JwtAuthenticationEntryPoint
 com/tutorial/backend/entity/QChatRoom.java
@@ -203,10 +203,10 @@ com/tutorial/backend/controller/dto/ChatMessageDto.java
  com.tutorial.backend.controller.dto.ChatMessageDto$ChatMessageDtoBuilder
 com/tutorial/backend/entity/type/MessageType.java
  com.tutorial.backend.entity.type.MessageType
+com/tutorial/backend/controller/OpenAiController.java
+ com.tutorial.backend.controller.OpenAiController
 com/tutorial/backend/controller/dto/ChatFileMessageDto.java
  com.tutorial.backend.controller.dto.ChatFileMessageDto
  com.tutorial.backend.controller.dto.ChatFileMessageDto$ChatFileMessageDtoBuilder
-com/tutorial/backend/controller/OpenAiController.java
- com.tutorial.backend.controller.OpenAiController
-com/tutorial/backend/controller/OAuthController.java
- com.tutorial.backend.controller.OAuthController
+com/tutorial/backend/config/MongoConfig.java
+ com.tutorial.backend.config.MongoConfig
