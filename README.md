@@ -54,13 +54,12 @@ EmotionTalk은 지능이 낮은 지적 장애인이 채팅을 하면서 자신�
 
 ## 🚀 프로젝트 실행 방법  
 
+
+### 1️⃣ 백엔드 실행 
 #### 실행 명령어  
 ```sh
+brew install gradle
 ./gradlew bootRun
-```
-또는  
-```sh
-mvn spring-boot:run
 ```
 
 ---
