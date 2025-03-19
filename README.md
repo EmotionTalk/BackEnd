@@ -85,4 +85,3 @@ npm start
 | ⚙️ Backend Server & Frontend 일부 | 홍윤기 |
 | 🎨 Frontend Server & Web Design | 남주영 |
 | 🖥 Frontend Server | 이유진 |
-](https://github.com/yunkihong-dev/ET-BackEnd)
