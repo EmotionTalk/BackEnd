@@ -1,4 +1,4 @@
-# 🗨️ EmotionTalk - Backend & Frontend  
+ㅎ[ㅎ# 🗨️ EmotionTalk - Backend & Frontend  
 
 2024 안동대학교 캡스톤 디자인에 참가해 **대상**을 받은 EmotionTalk의 서버 및 클라이언트 코드입니다.  
 EmotionTalk은 지적 장애인이 채팅을 통해 자신의 감정을 분석하고 피드백을 받을 수 있도록 돕는 **AI 기반 채팅 웹 서비스**입니다.  
@@ -34,7 +34,6 @@ EmotionTalk은 지능이 낮은 지적 장애인이 채팅을 하면서 자신�
 
 ### ✅ Frontend  
 - **프레임워크:** React  
-- **상태 관리:** (사용하는 상태 관리 라이브러리가 있다면 추가)  
 - **인증 및 보안:** JWT  
 - **채팅:** WebSocket (Socket.io)  
 - **스타일링:** Styled-components  
