@@ -1,4 +1,4 @@
-ㅎ[ㅎ# 🗨️ EmotionTalk - Backend & Frontend  
+# 🗨️ EmotionTalk - Backend & Frontend  
 
 2024 안동대학교 캡스톤 디자인에 참가해 **대상**을 받은 EmotionTalk의 서버 및 클라이언트 코드입니다.  
 EmotionTalk은 지적 장애인이 채팅을 통해 자신의 감정을 분석하고 피드백을 받을 수 있도록 돕는 **AI 기반 채팅 웹 서비스**입니다.  
@@ -85,3 +85,4 @@ npm start
 | ⚙️ Backend Server & Frontend 일부 | 홍윤기 |
 | 🎨 Frontend Server & Web Design | 남주영 |
 | 🖥 Frontend Server | 이유진 |
+](https://github.com/yunkihong-dev/ET-BackEnd)
